@@ -312,3 +312,7 @@ void Binary::show()
 
 
 These explanations and examples should help you understand the fundamental concepts of OOP in C++.
+
+----
+
+<!-- # Q2. -->
