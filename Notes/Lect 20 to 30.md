@@ -570,3 +570,234 @@ This demonstrates how to pass objects as function arguments in C++, allowing fun
 
 -----
 
+
+
+# Q3. Explain following in CPP
+1. Friend Function in CPP? Its use?
+2. Properties of Friend Function.
+3. Member Friend Function and Friend Classes
+4. SWAP in OOPS using friend function
+5. What is Constructor in CPP ? Explain its Characteristics
+6. Explain parametrized and default constructor with example
+
+
+Let's go through each of these topics one by one:
+
+### 1. **Friend Function in C++:**
+A friend function in C++ is a function that is not a member of a class but has the privilege to access the class's private and protected members. A friend function is declared by using the keyword `friend` inside the class to which it needs access.
+
+**Use:**
+Friend functions are useful when:
+- We need to access private or protected members of two or more different classes.
+- We want to define a function that performs some operations that are not logically part of the class but still require access to its private members.
+
+**Example Explanation:**
+
+```cpp
+#include <iostream>
+using namespace std;
+
+class Comp {
+    int a, b;
+    friend Comp hari(Comp, Comp); // Declare a friend function
+
+public:
+    void Set(int n1, int n2) {
+        a = n1;
+        b = n2;
+    }
+    void Show() {
+        cout << "\n Complex No:" << a << " + " << b << "i ";
+    }
+};
+
+Comp hari(Comp o1, Comp o2) {
+    Comp o3;
+    o3.Set((o1.a + o2.a), (o1.b + o2.b)); // Accessing private members of Comp
+    return o3;
+}
+
+int main() {
+    Comp p, q, r;
+    p.Set(4, 5);
+    p.Show();
+
+    q.Set(6, 7);
+    q.Show();
+
+    r = hari(p, q);
+    r.Show();
+
+    return 0;
+}
+```
+In this example:
+- The function `hari` is a friend of the class `Comp`. It can access the private members `a` and `b` of objects `o1` and `o2` even though they are private.
+- This function adds the real and imaginary parts of two complex numbers and returns the result.
+
+### 2. **Properties of Friend Function:**
+- **Access:** A friend function can access private and protected members of the class in which it is declared as a friend.
+- **Not a Member Function:** It is not a member function of the class but can access its members.
+- **Declared Inside Class:** It must be declared inside the class but defined outside the class.
+- **Invocation:** A friend function can be called without using an object of the class, unlike member functions.
+- **Scope:** The scope of a friend function is not limited to the class in which it is declared.
+
+### 3. **Member Friend Function and Friend Classes with Program:**
+
+**Member Friend Function:**
+A member function of one class can be a friend function of another class.
+
+**Friend Classes:**
+A class can be made a friend of another class, which allows all member functions of the friend class to access the private and protected members of the other class.
+
+**Example:**
+```cpp
+#include <iostream>
+using namespace std;
+
+class B; // Forward declaration
+
+class A {
+    int x;
+public:
+    A(int i) : x(i) {}
+    friend void show(A, B); // Friend function
+};
+
+class B {
+    int y;
+public:
+    B(int i) : y(i) {}
+    friend void show(A, B); // Friend function
+};
+
+void show(A a, B b) {
+    cout << "A's x: " << a.x << " and B's y: " << b.y << endl;
+}
+
+int main() {
+    A objA(5);
+    B objB(10);
+    show(objA, objB); // Accessing private members of both classes
+    return 0;
+}
+```
+Here, `show` is a friend function of both `A` and `B`, allowing it to access the private members of both classes.
+
+### 4. **SWAP in OOP using Friend Function with Code:**
+
+**Example:**
+```cpp
+#include <iostream>
+using namespace std;
+class Y;
+class X
+{
+    int a;
+
+public:
+    void SetData(int n1)
+    {
+        a = n1;
+    }
+    void show()
+    {
+        cout << "\n Value Of Class X:" << a;
+    }
+    friend void Exchange(X &, Y &);
+};
+class Y
+{
+    int a;
+
+public:
+    void SetData(int n1)
+    {
+        a = n1;
+    }
+    void show()
+    {
+        cout << "\n Value Of Class Y:" << a;
+    }
+    friend void Exchange(X &, Y &);
+};
+void Exchange(X &o1, Y &o2)
+{
+    int temp = o1.a;
+    o1.a = o2.a;
+    o2.a = temp;
+}
+
+int main()
+{
+    X ok1;
+    Y ok2;
+
+    ok1.SetData(10);
+    ok2.SetData(50);
+
+    cout << "\n Values Before Exchange:";
+    ok1.show();
+    ok2.show();
+    Exchange(ok1, ok2);
+    cout << "\n Values After Exchange:";
+    ok1.show();
+    ok2.show();
+
+    return 0;
+}
+```
+In this code, the `swap` function is a friend of `SwapClass` and swaps the private members of two objects.
+
+### 5. **Constructor in C++:**
+A constructor is a special member function of a class that is executed whenever new objects of that class are created. Constructors have the same name as the class and do not have a return type, not even `void`.
+
+**Characteristics:**
+- **Automatic Initialization:** Constructors are automatically called when an object is created.
+- **Overloading:** Constructors can be overloaded to create multiple constructors with different parameters.
+- **No Return Type:** Constructors do not return any value.
+- **Default Constructor:** If no constructor is defined, C++ provides a default constructor.
+
+### 6. **Parameterized and Default Constructor with Example:**
+
+**Default Constructor:**
+A default constructor is one that takes no arguments. If no constructor is provided, the compiler generates a default one.
+
+**Parameterized Constructor:**
+A constructor that takes parameters to initialize an object with specific values.
+
+**Example:**
+
+```cpp
+#include <iostream>
+using namespace std;
+
+class Demo {
+    int x;
+public:
+    Demo() { // Default constructor
+        x = 0;
+    }
+
+    Demo(int val) { // Parameterized constructor
+        x = val;
+    }
+
+    void show() {
+        cout << "Value of x: " << x << endl;
+    }
+};
+
+int main() {
+    Demo obj1; // Calls default constructor
+    Demo obj2(10); // Calls parameterized constructor
+
+    obj1.show();
+    obj2.show();
+
+    return 0;
+}
+```
+In this example:
+- `obj1` uses the default constructor and initializes `x` to 0.
+- `obj2` uses the parameterized constructor to initialize `x` to 10.
