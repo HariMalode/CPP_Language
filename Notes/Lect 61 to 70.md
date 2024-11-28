@@ -215,7 +215,66 @@ In this example, when `print(10)` is called, it prefers the non-template version
 
 ### 2. **Standard Template Library (STL)**
 
-The **Standard Template Library (STL)** is a powerful library in C++ that provides generic classes and functions to implement common data structures and algorithms. It is built around three main components:
+The Standard Template Library (STL) in C++ is a powerful set of template classes and functions that provide generic programming capabilities. It includes built-in data structures, algorithms, and iterators to simplify and standardize common programming tasks. Here’s a breakdown:
+
+### Key Components of STL:
+1. **Containers**: Used to store and organize collections of data.
+   - **Sequence Containers**: Maintain elements in a linear arrangement.
+     - `vector`
+     - `list`
+     - `deque`
+   - **Associative Containers**: Store key-value pairs and enable fast retrieval.
+     - `set`
+     - `map`
+     - `multiset`
+     - `multimap`
+   - **Unordered Containers**: Similar to associative containers but use hash tables.
+     - `unordered_set`
+     - `unordered_map`
+     - `unordered_multiset`
+     - `unordered_multimap`
+
+2. **Iterators**: Provide a way to traverse elements in containers.
+   - Examples: `begin()`, `end()`, `rbegin()`, `rend()`
+
+3. **Algorithms**: Provide common operations like searching, sorting, and modifying data.
+   - Examples: `sort`, `find`, `binary_search`, `reverse`, `accumulate`
+
+4. **Functors**: Function objects that can be used as arguments to algorithms.
+
+5. **Utility Components**:
+   - `pair`: Combines two values into one.
+   - `tuple`: Combines multiple values into one.
+
+### Example: Using STL
+```cpp
+#include <iostream>
+#include <vector>
+#include <algorithm> // For sort
+
+int main() {
+    std::vector<int> nums = {5, 2, 9, 1, 5, 6};
+
+    // Sorting the vector
+    std::sort(nums.begin(), nums.end());
+
+    // Displaying the sorted vector
+    for (int num : nums) {
+        std::cout << num << " ";
+    }
+    return 0;
+}
+```
+
+**Output**:  
+`1 2 5 5 6 9`
+
+### Advantages:
+- Reduces development time.
+- Promotes code reusability.
+- Provides efficient and tested implementations.
+
+---
 
 1. **Containers**: Structures used to hold collections of data.
 2. **Algorithms**: Functions used to perform operations on containers like searching, sorting, etc.
@@ -505,3 +564,66 @@ int main() {
 In this example:
 - `myMap[1] = "Apple";` inserts the key-value pair `1: "Apple"` into the map.
 - `it->first` gives the key, and `it->second` gives the corresponding value.
+
+---
+
+# DEQUE
+
+
+A **deque** (pronounced "deck") is a double-ended queue that allows for efficient insertion and deletion at both the front and the back of the container. It is implemented as a dynamic array that can grow in both directions.
+
+```
+#include<iostream>
+#include<deque>
+using namespace std;
+int main()
+{
+    deque<int>ok;  //creating deque
+    
+    int ch,item,ans;
+    do{
+    cout<<"\n---------MENU---------";
+    cout<<"\n 1.Insert From Rear";
+    cout<<"\n 2.Insert From Front";
+    cout<<"\n 3.Delete From Rear";
+    cout<<"\n 4.Delete From Front";
+    cout<<"\n 5.Display Data";
+    cout<<"\n 6.EXIT";
+    cout<<"\n Enter Your Choice:";
+    cin>>ch;
+
+    switch(ch){
+        case 1:
+            cout<<"\n Enter element :";
+            cin>>item;
+            ok.push_back(item);
+            break;
+        case 2:
+            cout<<"\n Enter element :";
+            cin>>item;
+            ok.push_front(item);
+            break;
+        case 3:
+            item=ok.back();
+            ok.pop_back();
+            cout<<" Deleted Item is "<<item;
+            break;
+        case 4:
+            item=ok.front();
+            ok.pop_front();
+            cout<<" Deleted Item is "<<item;
+            break;
+        case 5:
+            deque<int>::iterator iter;
+            cout<<"Size Of Deque is "<<ok.size()<<endl;
+            for(iter=ok.begin();iter!=ok.end();iter++){
+                cout<<*iter<<"\t";
+            }
+
+    }
+    
+    }while(ans!=6);
+
+return 0;
+}
+```

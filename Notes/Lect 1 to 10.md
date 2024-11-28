@@ -422,4 +422,14 @@ int main() {
 }
 ```
 
+**Iterator Loop**
+ loop to iterate through collections like arrays or vectors.
+```
+int arr[] = {1, 2, 3, 4, 5};
+for(int i: arr) {
+    std::cout << i << std::endl;
+}
+
+```
+
 These examples cover the various operators, variables, typecasting, conditional statements, and loops in C++. By understanding and practicing these concepts, you can gain a solid foundation in C++ programming.
